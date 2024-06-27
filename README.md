@@ -19,7 +19,7 @@ direct path. The challenge is to touch and stop at each cone.
 - Run times are less than 15 Minutes
 - Robots checked for weight(65 lbs), size(48x48x60 in), and safety switch compliance.
 
-[https://www.dprg.org/wp-content/uploads/2024/06/robocolumbusplus_REMOTE-20240611.pdf](https://www.dprg.org/wp-content/uploads/2024/06/robocolumbusplus-20240611-1.pdf)
+(https://www.dprg.org/wp-content/uploads/2024/06/robocolumbusplus-20240611-1.pdf)
 
 
 
