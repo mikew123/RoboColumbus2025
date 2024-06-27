@@ -32,6 +32,10 @@ The motor drive, steering and shift control signals must be multiplexed between 
 
 The main battery in the engine compartment will also be used for sensors and computer power. A DC-DC module would be added in the engine compartment with 2 sets of 5V at 3 Amps power leads to the Jeep cabin. Fusing the power from the main battery is added for protection. Combining the control multiplexor and DC converter is a good idea.
 
+# Power
+Tap from 3S 11.1V LiPo battery in engine compartment with fuse
+Two DC-DC converters/regulators for computer and sensors in selaed box in engine compartment
+
 # Connectivity
 - Loran for run and kill switch
 - RC receiver for manual steering control
