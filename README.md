@@ -24,5 +24,33 @@ direct path. The challenge is to touch and stop at each cone.
 
 
 
-# Platform
-The AXIAL 
+# Robot platform
+The AXIAL RCX6 1/6 scale Jeep rock crawler platform was selected to be used for the robot. This platform allows generous room for sensors and electronics to be added and can be installed into the interior of the Jeep for protection.
+https://www.axialadventure.com/product/1-6-scx6-jeep-jlu-wrangler-4x4-rock-crawler-rtr-green/AXI05000T1.html
+
+The motor drive, steering and shift control signals must be multiplexed between the RC receiver and the computer. A module in the engine compartment will be added to perform this with a serial interface to the computer in the Jeep cabin. The RC receiver is powered from the motor controller (facrory default) and the connections to the computer is optional, the module will power up to use the RC receiver signals.
+
+The main battery in the engine compartment will also be used for sensors and computer power. A DC-DC module would be added in the engine compartment with 2 sets of 5V at 3 Amps power leads to the Jeep cabin. Fusing the power from the main battery is added for protection. Combining the control multiplexor and DC converter is a good idea.
+
+# Sensors
+## GPS
+GPS receiver with optional RTK capbility
+Used for primary odometry
+## IMU
+IMU to provide tilt compensation for sensors and maybe bearing to help GPS
+## Camera
+Object detection and depth camera
+## LIDAR
+Optional rotating LIDAR for far obsticle detection and avoidance
+## TOF
+Time Of Flight sensors on front, rear and optional sides with mm resolution for close obstical avoidance and close cone sensor
+
+# Computer 
+- Raspberry Pi4 (or 5)
+- Enbedded PC with Linux or Windows (WSL)
+  
+# Software
+## ROS2
+- Humble or Iron requires Linx Ubuntu 20.04 OS
+- 
+
