@@ -36,7 +36,7 @@ The main battery in the engine compartment will also be used for sensors and com
 Tap from 3S 11.1V LiPo battery in engine compartment with fuse
 Two DC-DC converters/regulators for computer and sensors in selaed box in engine compartment
 
-# Connectivity
+# Remote onnectivity
 - Loran for run and kill switch
 - RC receiver for manual steering control
 - WIFI for development and debug and course configuration
@@ -63,3 +63,15 @@ Time Of Flight sensors on front, rear and optional sides with mm resolution for 
 - Humble or Iron requires Linx Ubuntu 20.04 OS
 - 
 
+Pololu 4-Channel RC Servo Multiplexer
+6V, 2.7A Step-Down Voltage Regulator D36V28F6
+RP2040 controller
+Breadboard
+
+# New electronics in engine compartment
+A waterproof box is mounted to the rear battery holder. This box holds the DC-DC converters for the electronics in the cabin, the servo signal mux and a micro controller to manage the servo switch and send some telemetry to the computer in the cabin. The servo switch defaults to connecting the RC receiver to the motor and servos.
+## Method to switch to computer control
+The steering wheel and speed switch on the RC transmitter is used to switch to-from computer control
+- Switch to computer control: Turn steering right and press speed switch UP (low speed)
+- Switch to receiver control: Turn steering left and press speed switch UP
+## 
