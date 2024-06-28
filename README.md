@@ -1,7 +1,7 @@
 # RoboColumbus2025
 Wheeled autonomus robot for 2025 DPRG RoboColumbus competion
 
-This project was started in June 2024 and is expected to have a competitive robot for the RoboColumbus competition in Fall of 2025. I will drive the robot around the field in The Fall of 2024 and maybe have odometry and mapping show on ROS2 Rviz2.
+This project was started in June 2024 and is expected to have a competitive robot for the RoboColumbus competition in Fall of 2025. I will drive the robot around the field in The Fall of 2024 and maybe have odometry and mapping displayed using ROS2 Rviz2.
 https://www.dprg.org/robocolumbus-2024/
 
 # RoboColumbus competition
@@ -20,9 +20,6 @@ direct path. The challenge is to touch and stop at each cone.
 - Robots checked for weight(65 lbs), size(48x48x60 in), and safety switch compliance.
 
 (https://www.dprg.org/wp-content/uploads/2024/06/robocolumbusplus-20240611-1.pdf)
-
-
-
 
 # Robot platform
 The AXIAL RCX6 1/6 scale Jeep rock crawler platform was selected to be used for the robot. This platform allows generous room for sensors and electronics to be added and can be installed into the interior of the Jeep for protection.
@@ -63,10 +60,13 @@ Time Of Flight sensors on front, rear and optional sides with mm resolution for 
 - Humble or Iron requires Linx Ubuntu 20.04 OS
 - 
 
+# Electronic modules
+## Servo switch
 Pololu 4-Channel RC Servo Multiplexer
+## DC-DC converter
 6V, 2.7A Step-Down Voltage Regulator D36V28F6
+## Microcontroller
 RP2040 controller
-Breadboard
 
 # New electronics in engine compartment
 A waterproof box is mounted to the rear battery holder. This box holds the DC-DC converters for the electronics in the cabin, the servo signal mux and a micro controller to manage the servo switch and send some telemetry to the computer in the cabin. The servo switch defaults to connecting the RC receiver to the motor and servos.
@@ -74,4 +74,11 @@ A waterproof box is mounted to the rear battery holder. This box holds the DC-DC
 The steering wheel and speed switch on the RC transmitter is used to switch to-from computer control
 - Switch to computer control: Turn steering right and press speed switch UP (low speed)
 - Switch to receiver control: Turn steering left and press speed switch UP
-## 
+## Electronics board
+The electronic modules are connected using soldered wires and a 0.1" breadboard cut to fit the waterproff box interior
+The RC receiver signals are connected to the MASTER pins of the RC switch module using standard servo cables
+The motor and servo signals are connected to the OUT pins of the RC switch module using standard servo cables
+The controler pins are hard wired to the SLAVE pins of the RC switch
+The controller USB supplies the power only to the micro controller
+## DC-DC converters
+The DC-DC converters are attached to the interior side of the waterproof box. The power input from the battery has an in-line fuse which is not in the box to protect the batteries from an electrical short
