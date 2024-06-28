@@ -52,12 +52,12 @@ Optional rotating LIDAR for far obsticle detection and avoidance
 Time Of Flight sensors on front, rear and optional sides with mm resolution for close obstical avoidance and close cone sensor
 
 # Computer 
-- Raspberry Pi4 (or 5)
-- Enbedded PC with Linux or Windows (WSL)
+- Raspberry Pi4 (or 5) with OS Ubuntu 20.04
+- Enbedded PC with Linux or Windows (WSL) with OS Ubuntu 20.04
   
 # Software
 ## ROS2
-- Humble or Iron requires Linx Ubuntu 20.04 OS
+- ROS2 Humble or Iron versions requires Linux Ubuntu 20.04 OS
 - 
 
 # Electronic modules
@@ -82,3 +82,14 @@ The controler pins are hard wired to the SLAVE pins of the RC switch
 The controller USB supplies the power only to the micro controller
 ## DC-DC converters
 The DC-DC converters are attached to the interior side of the waterproof box. The power input from the battery has an in-line fuse which is not in the box to protect the batteries from an electrical short
+# Micro controller firmware
+The microcontroller firmware is C-code developed using the Arduino IDE. The interface to the controller uses the USB port for a serial communications interface. A simple Json data structure sends data to-from the computer in the cabin over the USB serial interface.
+## RC switch interface
+### Outputs to RC switch
+- Slave select
+- Steering servo
+- Motor speed/fwd-rev
+- High-Low speed select servo
+### Inputs from RC switch
+- Steering
+- High-Low speed select
