@@ -70,7 +70,7 @@ RP2040 controller
 
 # New electronics in engine compartment
 A waterproof box is mounted to the rear battery holder. This box holds the DC-DC converters for the electronics in the cabin, the servo signal mux and a micro controller to manage the servo switch and send some telemetry to the computer in the cabin. The servo switch defaults to connecting the RC receiver to the motor and servos.
-![1908 Wickmere Mews Google Map](https://github.com/mikew123/RoboColumbus2025/assets/6844774/2d9c7bb7-93d1-42c1-91ba-fdb22eb5413c)
+
 
 ## Method to switch to computer control
 The steering wheel and speed switch on the RC transmitter is used to switch to-from computer control. This must be done with throttle at idle.
