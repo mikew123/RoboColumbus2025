@@ -27,16 +27,17 @@ https://www.axialadventure.com/product/1-6-scx6-jeep-jlu-wrangler-4x4-rock-crawl
 
 The motor drive, steering and shift control signals must be multiplexed between the RC receiver and the computer. A module in the engine compartment will be added to perform this with a serial interface to the computer in the Jeep cabin. The RC receiver is powered from the motor controller (facrory default) and the connections to the computer is optional, the module will power up to use the RC receiver signals.
 
-The main battery in the engine compartment will also be used for sensors and computer power. A DC-DC module would be added in the engine compartment with 2 sets of 5V at 3 Amps power leads to the Jeep cabin. Fusing the power from the main battery is added for protection. Combining the control multiplexor and DC converter is a good idea.
+The main battery in the engine compartment will also be used for sensors and computer power. A DC-DC module would be added in the engine compartment with 2 sets of 5V at 3 Amps power leads to the Jeep cabin. Fusing the power from the main battery is added for protection. The control multiplexor and DC converter on one board.
 
 # Power
-Tap from 3S 11.1V LiPo battery in engine compartment with fuse
-Two DC-DC converters/regulators for computer and sensors in selaed box in engine compartment
+Tap from 3S 11.1V LiPo battery in engine compartment with a fuse.
+Two DC-DC converters/regulators for computer and sensors in sealed box in engine compartment.
 
-# Remote onnectivity
-- Loran for run and kill switch
-- RC receiver for manual steering control
-- WIFI for development and debug and course configuration
+# Remote connectivity
+- RC transmitter for selecting the recevier or computer </br>
+  When the computer is selected it is used as a kill switch </br>
+  When receiver is selected it is used for manual steering control </br>
+- WIFI for development and debug and course configuration </br>
 
 # Sensors
 ## GPS
@@ -62,14 +63,24 @@ Time Of Flight sensors on front, rear and optional sides with mm resolution for 
 
 # Electronic modules
 ## Servo switch
-Pololu 4-Channel RC Servo Multiplexer
+This switches the servo and engine ESC signals between the RC receiver and the computer</br>
+Pololu 2807 4-Channel RC Servo Multiplexer (Partial Kit)</br>
+<https://www.pololu.com/product/2807>
 ## DC-DC converter
-6V, 2.7A Step-Down Voltage Regulator D36V28F6
+This supplies power for the cabin electronics. The 6V allows a protection diode while keeping the voltage above 5V</br>
+Pololu 6V, 2.7A Step-Down Voltage Regulator D36V28F6</br>
+<https://www.pololu.com/product/3783>
+## Level shifter
+This protects the 3.3V input pins on the micro controller from the 6V signals from the RC receiver</br>
+Pololu Logic Level Shifter, 4-Channel, Bidirectional 2595</br>
+<https://www.pololu.com/product/2595>
 ## Microcontroller
-RP2040 controller
+This selects between the computer in the cabin and the RC receiver. It also relays the steering, throttle and shift signals from the computer and the servos and motor ESC. It also allows the computer to set default ranges etc, and sends statuses back.</br>
+Waveshare RP2040-Zero, a Pico-like MCU Board Based on Raspberry Pi MCU RP2040, Mini ver.</br>
+<https://www.waveshare.com/rp2040-zero.htm>
 
 # New electronics in engine compartment
-A waterproof box is mounted to the rear battery holder. This box holds the DC-DC converters for the electronics in the cabin, the servo signal mux and a micro controller to manage the servo switch and send some telemetry to the computer in the cabin. The servo switch defaults to connecting the RC receiver to the motor and servos.
+A waterproof box is mounted to the rear battery holder. This box holds the DC-DC converters for the electronics in the cabin, the servo signal mux and a micro controller to manage the servo switch and send some telemetry to the computer in the cabin. The servo switch defaults to connecting the RC receiver to the motor and servos.</br>
 <img src="images/RCX6-engine_compartment_with_new electronics.jpg">
 
 ## Method to switch to computer control
@@ -81,11 +92,11 @@ The electronic modules are connected using soldered wires and a 0.1" breadboard 
 The RC receiver signals are connected to the MASTER pins of the RC switch module using standard servo cables
 The motor and servo signals are connected to the OUT pins of the RC switch module using standard servo cables
 The controler pins are hard wired to the SLAVE pins of the RC switch
-The controller USB supplies the power only to the micro controller
-<img src="images/engine_compartment_electronics_module.jpg">
-<img src="images/RCX6_engine_electronics_drawing.jpg">
-## DC-DC converters
-The DC-DC converters are attached to the interior side of the waterproof box. The power input from the battery has an in-line fuse which is not in the box to protect the batteries from an electrical short
+The controller USB supplies the power only to the micro controller</br>
+The DC-DC converters are inside the waterproof box. The power input from the battery has an in-line fuse which is not in the box to protect the batteries from an electrical short.</br>
+<img src="images/engine_compartment_electronics_module.jpg"></br>
+<img src="images/RCX6_engine_electronics_drawing.jpg"></br>
+
 # Micro controller firmware
 The microcontroller firmware is C-code developed using the Arduino IDE. The interface to the controller uses the USB port for a serial communications interface. A simple Json data structure sends data to-from the computer in the cabin over the USB serial interface.
 ## RC switch interface
@@ -97,3 +108,8 @@ The microcontroller firmware is C-code developed using the Arduino IDE. The inte
 ### Inputs from RC switch
 - Steering
 - High-Low speed select
+## JSON messages
+### Congfigure messages from the computer
+### Runtime controll messages from computer
+### Status messages to computer
+
