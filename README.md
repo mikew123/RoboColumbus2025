@@ -70,7 +70,7 @@ RP2040 controller
 
 # New electronics in engine compartment
 A waterproof box is mounted to the rear battery holder. This box holds the DC-DC converters for the electronics in the cabin, the servo signal mux and a micro controller to manage the servo switch and send some telemetry to the computer in the cabin. The servo switch defaults to connecting the RC receiver to the motor and servos.
-
+<img src="images/RCX6-engine_compartment_with_new electronics.jpg">
 
 ## Method to switch to computer control
 The steering wheel and speed switch on the RC transmitter is used to switch to-from computer control. This must be done with throttle at idle.
@@ -82,6 +82,8 @@ The RC receiver signals are connected to the MASTER pins of the RC switch module
 The motor and servo signals are connected to the OUT pins of the RC switch module using standard servo cables
 The controler pins are hard wired to the SLAVE pins of the RC switch
 The controller USB supplies the power only to the micro controller
+<img src="images/engine_compartment_electronics_module.jpg">
+<img src="images/RCX6_engine_electronics_drawing.jpg">
 ## DC-DC converters
 The DC-DC converters are attached to the interior side of the waterproof box. The power input from the battery has an in-line fuse which is not in the box to protect the batteries from an electrical short
 # Micro controller firmware
