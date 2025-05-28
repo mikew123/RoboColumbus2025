@@ -14,9 +14,12 @@ The wheel spacing is TBD
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
+from geometry_msgs.msg import Quaternion
 import math
 import serial
 import json
+import tf_transformations
 
 class WheelControllerNode(Node):
     def __init__(self):
@@ -27,9 +30,16 @@ class WheelControllerNode(Node):
             self.cmd_vel_callback,
             10
         )
+        self.odom_publisher = self.create_publisher(Odometry, 'odom', 10)
         # Example parameters (replace with actual values)
         self.wheel_base = 0.5  # meters, TBD
         self.wheel_diameter = 0.15  # meters, TBD
+
+        # Robot pose state
+        self.x = 0.0
+        self.y = 0.0
+        self.yaw = 0.0
+        self.last_time = self.get_clock().now()
 
         # Serial port configuration (update as needed)
         self.serial_port = 'COM3'  # Change to your serial port
@@ -60,7 +70,6 @@ class WheelControllerNode(Node):
             f"Front steering angle: {math.degrees(steering_angle):.3f} deg"
         )
 
-        # TODO: Send commands over serial interface
         # Send commands over serial interface as JSON
         if self.ser and self.ser.is_open:
             command = {
@@ -72,6 +81,38 @@ class WheelControllerNode(Node):
                 self.ser.write(json_cmd.encode('utf-8'))
             except Exception as e:
                 self.get_logger().error(f"Failed to write to serial: {e}")
+
+        # Odometry calculation
+        current_time = self.get_clock().now()
+        dt = (current_time - self.last_time).nanoseconds * 1e-9
+        self.last_time = current_time
+
+        # Simple differential drive odometry update
+        delta_x = wheel_velocity * math.cos(self.yaw) * dt
+        delta_y = wheel_velocity * math.sin(self.yaw) * dt
+        delta_yaw = angular_z * dt
+
+        self.x += delta_x
+        self.y += delta_y
+        self.yaw += delta_yaw
+
+        # Prepare odometry message
+        odom_msg = Odometry()
+        odom_msg.header.stamp = current_time.to_msg()
+        odom_msg.header.frame_id = "odom"
+        odom_msg.child_frame_id = "base_link"
+        odom_msg.pose.pose.position.x = self.x
+        odom_msg.pose.pose.position.y = self.y
+        odom_msg.pose.pose.position.z = 0.0
+
+        # Convert yaw to quaternion
+        q = tf_transformations.quaternion_from_euler(0, 0, self.yaw)
+        odom_msg.pose.pose.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+
+        odom_msg.twist.twist.linear.x = wheel_velocity
+        odom_msg.twist.twist.angular.z = angular_z
+
+        self.odom_publisher.publish(odom_msg)
 
     def destroy_node(self):
         if hasattr(self, 'ser') and self.ser and self.ser.is_open:
